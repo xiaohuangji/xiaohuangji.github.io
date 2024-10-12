@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Yellow_Chick">
+  <meta name="keywords" content="ACM">
+  
+    <meta name="description" content="思路： 1、首先通过观察，这些点和边构成了一个圆环。对于给出的每对朋友a,b，这两点之间的优弧和劣弧必然需要维护一条。 2、因为发现，对一个点对进行操作，就是对一个区间进行操作，所以考虑使用线段树来做，对点对间圆弧覆盖的区间进行区间加法，此时0的数量就是可以删除的边数。 3、用最开始的状态初始化完线段树后，要考虑如何更新从而找到最优答案。假设一开始都是用圆环下边。可以枚举每条边，让他们变成可以删除">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Codeforces round 962 G题解">
+<meta property="og:url" content="http://yellow-chick.github.io/Codeforces%20round%20962/G.html">
+<meta property="og:site_name" content="Hexo &quot;Yellow_Chick&#39;s Blog&quot;">
+<meta property="og:description" content="思路： 1、首先通过观察，这些点和边构成了一个圆环。对于给出的每对朋友a,b，这两点之间的优弧和劣弧必然需要维护一条。 2、因为发现，对一个点对进行操作，就是对一个区间进行操作，所以考虑使用线段树来做，对点对间圆弧覆盖的区间进行区间加法，此时0的数量就是可以删除的边数。 3、用最开始的状态初始化完线段树后，要考虑如何更新从而找到最优答案。假设一开始都是用圆环下边。可以枚举每条边，让他们变成可以删除">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-12T16:33:15.000Z">
+<meta property="article:modified_time" content="2024-10-12T17:15:22.666Z">
+<meta property="article:author" content="Yellow_Chick">
+<meta property="article:tag" content="ACM">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Codeforces round 962 G题解 - Hexo &#34;Yellow_Chick&#39;s Blog&#34;</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"yellow-chick.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 60vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Yellow_Chick&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/hutao.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Codeforces round 962 G题解"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<article class="page-content">
+  <p>思路：</p>
+<p>1、首先通过观察，这些点和边构成了一个圆环。对于给出的每对朋友a,b，这两点之间的优弧和劣弧必然需要维护一条。</p>
+<p>2、因为发现，对一个点对进行操作，就是对一个区间进行操作，所以考虑使用线段树来做，对点对间圆弧覆盖的区间进行区间加法，此时0的数量就是可以删除的边数。</p>
+<p>3、用最开始的状态初始化完线段树后，要考虑如何更新从而找到最优答案。假设一开始都是用圆环下边。可以枚举每条边，让他们变成可以删除的，此时要把所有以这个边左端点为起点的所有边翻到圆环上边去，再把所有以这个边左端点为终点的边放回圆环下边来，这样当前枚举的这条边必定是没有任何覆盖的。并且这样就能使得当前的状态是“满足当前边被删的唯一状态”，(为什么是唯一呢，因为端点在当前边左边能翻上去（终点在右边）的都必须翻上去，否侧会覆盖当前枚举的区间，不能翻上去（终点在左边）的都不能翻上去，否则也会覆盖当前的区间，而右边的线段必然不能翻上去，否则一定会覆盖当前的区间，所以更新完后，此时就是当前枚举的段不被覆盖的唯一解)，最优解必然出现在某条边可以被删除的状态之中，所以枚举完更新答案即可。</p>
+<p>4、线段树维护以i为左端点的边的权值，维护min和min_cnt，求0的数量的时候，先判断min是不是为0，为0的话就是min_cnt，否则为0.</p>
+<p>代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PII pair<span class="hljs-string">&lt;int, int&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> double long double</span><br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">2e6</span> + <span class="hljs-number">10</span>;<br><span class="hljs-type">const</span> <span class="hljs-type">int</span> inf = <span class="hljs-number">1e12</span>;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">data</span>&#123;<br>    <span class="hljs-type">int</span> l, r;<br>    <span class="hljs-type">int</span> min, zcnt; <span class="hljs-comment">//区间当前min， 区间中0值的数量</span><br>    <span class="hljs-type">int</span> lz; <span class="hljs-comment">//懒标记</span><br>&#125;seg[<span class="hljs-number">4</span> * N];<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pull</span><span class="hljs-params">(<span class="hljs-type">int</span> p)</span></span>&#123;<br>    seg[p].min = <span class="hljs-built_in">min</span>(seg[p &lt;&lt; <span class="hljs-number">1</span>].min, seg[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].min);<br>    <span class="hljs-keyword">if</span>(seg[p &lt;&lt; <span class="hljs-number">1</span>].min &lt; seg[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].min)&#123;<br>        seg[p].zcnt = seg[p &lt;&lt; <span class="hljs-number">1</span>].zcnt;<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(seg[p &lt;&lt; <span class="hljs-number">1</span>].min &gt; seg[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].min)&#123;<br>        seg[p].zcnt = seg[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].zcnt;<br>    &#125;<br>    <span class="hljs-keyword">else</span>&#123;<br>        seg[p].zcnt = seg[p &lt;&lt; <span class="hljs-number">1</span>].zcnt + seg[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].zcnt;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span>&#123;<br>    seg[p] = &#123;l, r, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-keyword">if</span>(l == r)&#123;<br>        seg[p].zcnt = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">return</span> ;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span>, l, mid);<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, r);<br>    <span class="hljs-built_in">pull</span>(p);<br>    <span class="hljs-keyword">return</span> ;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-type">int</span> p)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(seg[p].lz)&#123;<br>        seg[p &lt;&lt; <span class="hljs-number">1</span>].min += seg[p].lz;<br>        seg[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].min += seg[p].lz;<br>        seg[p &lt;&lt; <span class="hljs-number">1</span>].lz += seg[p].lz;<br>        seg[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].lz += seg[p].lz;<br>        seg[p].lz = <span class="hljs-number">0</span>;<br>    &#125;<br>    <span class="hljs-keyword">return</span> ;<br>&#125;<br><br><span class="hljs-function">PII <span class="hljs-title">rangeQuery</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(l &gt; seg[p].r || r &lt; seg[p].l)&#123;<br>        <span class="hljs-keyword">return</span> &#123;inf, <span class="hljs-number">0ll</span>&#125;;<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(seg[p].l &gt;= l &amp;&amp; seg[p].r &lt;= r)&#123;<br>        <span class="hljs-keyword">return</span> &#123;seg[p].min, seg[p].zcnt&#125;;<br>    &#125;<br>    <span class="hljs-built_in">push</span>(p);<br>    <span class="hljs-keyword">auto</span> [lmin, lcnt] = <span class="hljs-built_in">rangeQuery</span>(p &lt;&lt; <span class="hljs-number">1</span>, l, r);<br>    <span class="hljs-keyword">auto</span> [rmin, rcnt] = <span class="hljs-built_in">rangeQuery</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, l, r);<br>    <span class="hljs-keyword">if</span>(lmin &lt; rmin)&#123;<br>        <span class="hljs-keyword">return</span> &#123;lmin, lcnt&#125;;<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(lmin &gt; rmin)&#123;<br>        <span class="hljs-keyword">return</span> &#123;rmin, rcnt&#125;;<br>    &#125;<br>    <span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-keyword">return</span> &#123;lmin, lcnt + rcnt&#125;;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">rangeApply</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> x)</span></span>&#123;   <br>    <span class="hljs-keyword">if</span>(l &gt; seg[p].r || r &lt; seg[p].l)&#123;<br>        <span class="hljs-keyword">return</span> ;<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(seg[p].l &gt;= l &amp;&amp; seg[p].r &lt;= r)&#123;<br>        seg[p].min += x;<br>        seg[p].lz += x;<br>        <span class="hljs-keyword">return</span> ;<br>    &#125;<br>    <span class="hljs-built_in">push</span>(p);<br>    <span class="hljs-built_in">rangeApply</span>(p &lt;&lt; <span class="hljs-number">1</span>, l, r, x);<br>    <span class="hljs-built_in">rangeApply</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, l, r, x);<br>    <span class="hljs-built_in">pull</span>(p);<br>    <span class="hljs-keyword">return</span> ;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">rangeQuery</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span>&#123;<br>    <span class="hljs-keyword">auto</span> [min, cnt] = <span class="hljs-built_in">rangeQuery</span>(<span class="hljs-number">1</span>, l, r);<br>    <span class="hljs-keyword">if</span>(min &gt; <span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-keyword">return</span> (r - l + <span class="hljs-number">1</span>); <br>    &#125;<br>    <span class="hljs-keyword">else</span>&#123;<br>        <span class="hljs-built_in">return</span> (r - l + <span class="hljs-number">1</span>) - cnt; <br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> n,m;<br>    cin&gt;&gt;n&gt;&gt;m;<br><br>    <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, n);<br>    <span class="hljs-function">vector&lt;PII&gt; <span class="hljs-title">p</span><span class="hljs-params">(m + <span class="hljs-number">1</span>)</span></span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i)&#123;<br>        <span class="hljs-type">int</span> u, v;<br>        cin&gt;&gt;u&gt;&gt;v;<br>        p[i] = &#123;<span class="hljs-built_in">min</span>(u, v), <span class="hljs-built_in">max</span>(u, v)&#125;;<br>        <span class="hljs-built_in">rangeApply</span>(<span class="hljs-number">1</span>, p[i].first, p[i].second - <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);<span class="hljs-comment">//一开始假设都在圆的同一边</span><br>    &#125;<br><br>    <span class="hljs-type">int</span> ans = <span class="hljs-built_in">rangeQuery</span>(<span class="hljs-number">1</span>, n);<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">start</span>(n + <span class="hljs-number">1</span>), <span class="hljs-built_in">end</span>(n + <span class="hljs-number">1</span>);<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i)&#123;<span class="hljs-comment">//记录这些在圆的同一边的区间，然后枚举他们将其换到另一边</span><br>        <span class="hljs-keyword">auto</span> [l, r] = p[i];<br>        start[l].<span class="hljs-built_in">push_back</span>(i);<br>        end[r].<span class="hljs-built_in">push_back</span>(i);<br>    &#125;<br><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> j : start[i])&#123;<span class="hljs-comment">//这段关系走另外一个弧</span><br>            <span class="hljs-keyword">auto</span> [l, r] = p[j];<br>            <span class="hljs-comment">//cout&lt;&lt;l&lt;&lt;&quot; &quot;&lt;&lt;r&lt;&lt;&quot;\n&quot;;</span><br>            <span class="hljs-built_in">rangeApply</span>(<span class="hljs-number">1</span>, l, r - <span class="hljs-number">1</span>, <span class="hljs-number">-1</span>);<br>            <span class="hljs-built_in">rangeApply</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, l - <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);<br>            <span class="hljs-built_in">rangeApply</span>(<span class="hljs-number">1</span>, r, n, <span class="hljs-number">1</span>);<br>        &#125;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> j : end[i])&#123;<span class="hljs-comment">//前面换到另一段弧的影响到当前段了，要消除影响。</span><br>            <span class="hljs-keyword">auto</span> [l, r] = p[j];<br>            <span class="hljs-built_in">rangeApply</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, l - <span class="hljs-number">1</span>, <span class="hljs-number">-1</span>);<br>            <span class="hljs-built_in">rangeApply</span>(<span class="hljs-number">1</span>, r, n, - <span class="hljs-number">1</span>);<br>            <span class="hljs-built_in">rangeApply</span>(<span class="hljs-number">1</span>, l, r - <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);<br>        &#125;<br>        ans = <span class="hljs-built_in">min</span>(ans, <span class="hljs-built_in">rangeQuery</span>(<span class="hljs-number">1</span>, n));<br>    &#125;<br><br>    cout&lt;&lt;ans&lt;&lt;<span class="hljs-string">&quot;\n&quot;</span>;<br><br>    <span class="hljs-keyword">return</span> ;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>); <br>    cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br>    cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br><br>    <span class="hljs-type">int</span> t = <span class="hljs-number">1</span>;<br>    cin&gt;&gt;t;<br>    <span class="hljs-keyword">while</span> (t--) &#123;<br>        <span class="hljs-built_in">solve</span>();<br>    &#125;<br>    <span class="hljs-comment">//cout&lt;&lt;fixed &lt;&lt;setprecision(12) &lt;&lt; (double)clock() / (double)CLOCKS_PER_SEC &lt;&lt; &quot;\n&quot;;</span><br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+  
+
+</article>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
