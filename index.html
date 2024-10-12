@@ -228,13 +228,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2024/10/13/Codeforces%20round%20962/G/" target="_self">
+        <a href="/2024/10/13/G/" target="_self">
           Codeforces round 962 G题解
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/10/13/Codeforces%20round%20962/G/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/10/13/G/" target="_self">
         <div>
           思路： 1、首先通过观察，这些点和边构成了一个圆环。对于给出的每对朋友a,b，这两点之间的优弧和劣弧必然需要维护一条。 2、因为发现，对一个点对进行操作，就是对一个区间进行操作，所以考虑使用线段树来做，对点对间圆弧覆盖的区间进行区间加法，此时0的数量就是可以删除的边数。 3、用最开始的状态初始化完线段树后，要考虑如何更新从而找到最优答案。假设一开始都是用圆环下边。可以枚举每条边，让他们变成可以删除
         </div>
