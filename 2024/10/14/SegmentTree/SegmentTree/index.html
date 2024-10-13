@@ -19,22 +19,22 @@
   <meta name="author" content="Yellow_Chick">
   <meta name="keywords" content="ACM">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="扫描线：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100#inc">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yellow-chick.github.io/2024/08/04/hello-world/index.html">
+<meta property="og:title" content="SegmentTree">
+<meta property="og:url" content="http://yellow-chick.github.io/2024/10/14/SegmentTree/SegmentTree/index.html">
 <meta property="og:site_name" content="Hexo &quot;Yellow_Chick&#39;s Blog&quot;">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="扫描线：123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100#inc">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-04T11:38:18.918Z">
-<meta property="article:modified_time" content="2024-10-13T15:56:51.147Z">
+<meta property="article:published_time" content="2024-10-13T16:13:10.000Z">
+<meta property="article:modified_time" content="2024-10-13T16:14:08.370Z">
 <meta property="article:author" content="Yellow_Chick">
 <meta property="article:tag" content="ACM">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hello World - Hexo &#34;Yellow_Chick&#39;s Blog&#34;</title>
+  <title>SegmentTree - Hexo &#34;Yellow_Chick&#39;s Blog&#34;</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="SegmentTree"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-04 19:38" pubdate>
-          2024年8月4日 晚上
+        <time datetime="2024-10-14 00:13" pubdate>
+          2024年10月14日 凌晨
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          18 字
+          512 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          1 分钟
+          5 分钟
         
       </span>
     
@@ -271,24 +271,15 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Hello World</h1>
+            <h1 id="seo-header">SegmentTree</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+                <h2 id="扫描线："><a href="#扫描线：" class="headerlink" title="扫描线："></a>扫描线：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> int long long</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> PII pair<span class="hljs-string">&lt;int, int&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> double long double</span><br><br><span class="hljs-type">const</span> <span class="hljs-type">int</span> N = <span class="hljs-number">2e5</span> + <span class="hljs-number">10</span>;<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">line</span>&#123;<br>    <span class="hljs-type">int</span> x1, x2, h, tag;<br>    <span class="hljs-type">bool</span> <span class="hljs-keyword">operator</span>&lt;(line &amp;t)&#123;<span class="hljs-keyword">return</span> h &lt; t.h;&#125;<br>&#125;L[N];<br><br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">data</span>&#123;<br>    <span class="hljs-type">int</span> l, r, cnt, len;<br>    <span class="hljs-comment">//l,r:左右边界，cnt:被覆盖次数, len:被覆盖长度(x轴上的)</span><br>&#125;tr[N * <span class="hljs-number">8</span>];<br><br><span class="hljs-type">int</span> X[N];<span class="hljs-comment">//存X轴上的线段信息</span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pull</span><span class="hljs-params">(<span class="hljs-type">int</span> p)</span></span>&#123; <br>    <span class="hljs-type">int</span> l = tr[p].l, r = tr[p].r;<br>    <span class="hljs-keyword">if</span>(tr[p].cnt)&#123;<br>        tr[p].len = X[r + <span class="hljs-number">1</span>] - X[l];<br>    &#125;<br>    <span class="hljs-keyword">else</span>&#123;<br>        tr[p].len = tr[p &lt;&lt; <span class="hljs-number">1</span>].len + tr[p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>].len;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r)</span></span>&#123;<br>    tr[p] = &#123;l, r, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;;<br>    <span class="hljs-keyword">if</span>(l == r)&#123;<br>        <span class="hljs-keyword">return</span> ;<br>    &#125;<br>    <span class="hljs-type">int</span> mid = l + r &gt;&gt; <span class="hljs-number">1</span>;<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span>, l, mid);<br>    <span class="hljs-built_in">build</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, mid + <span class="hljs-number">1</span>, r);<br>    <span class="hljs-keyword">return</span> ;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">rangeApply</span><span class="hljs-params">(<span class="hljs-type">int</span> p, <span class="hljs-type">int</span> l, <span class="hljs-type">int</span> r, <span class="hljs-type">int</span> x)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(l &gt; tr[p].r || r &lt; tr[p].l)&#123;<br>        <span class="hljs-keyword">return</span> ;<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(tr[p].l &gt;= l &amp;&amp; tr[p].r &lt;= r)&#123;  <br>        tr[p].cnt += x;<br>        <span class="hljs-built_in">pull</span>(p);<span class="hljs-comment">//当前节点更新完后，先把本节点信息更新</span><br>        <span class="hljs-keyword">return</span> ;<br>    &#125;<br>    <span class="hljs-built_in">rangeApply</span>(p &lt;&lt; <span class="hljs-number">1</span>, l, r, x);<br>    <span class="hljs-built_in">rangeApply</span>(p &lt;&lt; <span class="hljs-number">1</span> | <span class="hljs-number">1</span>, l, r, x);<br>    <span class="hljs-built_in">pull</span>(p);<span class="hljs-comment">//从子节点更新信息</span><br>    <span class="hljs-keyword">return</span> ;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-type">int</span> n;<br>    cin&gt;&gt;n;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)&#123;<br>        <span class="hljs-type">int</span> x1, y1, x2, y2;<br>        cin&gt;&gt;x1&gt;&gt;y1&gt;&gt;x2&gt;&gt;y2;<br>        L[i] = &#123;x1, x2, y1, <span class="hljs-number">1</span>&#125;;<span class="hljs-comment">// 入边</span><br>        L[i + n] = &#123;x1, x2, y2, <span class="hljs-number">-1</span>&#125;; <span class="hljs-comment">//出边</span><br>        X[i] = x1; X[i + n] = x2;<span class="hljs-comment">//x坐标，后续用于对x进行离散化</span><br>    &#125;<br>    n *= <span class="hljs-number">2</span>; <span class="hljs-comment">//遍历所有入边和出边</span><br>    <span class="hljs-built_in">sort</span>(L + <span class="hljs-number">1</span>, L + n + <span class="hljs-number">1</span>);<span class="hljs-comment">//扫描线排序</span><br>    <span class="hljs-built_in">sort</span>(X + <span class="hljs-number">1</span>, X + n + <span class="hljs-number">1</span>);<span class="hljs-comment">//X坐标排序</span><br>    <span class="hljs-type">int</span> s = <span class="hljs-built_in">unique</span>(X + <span class="hljs-number">1</span>, X + n + <span class="hljs-number">1</span>) - (X + <span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">build</span>(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, s - <span class="hljs-number">1</span>);<span class="hljs-comment">//线段树存的是左端点代表的区间，从[1, 2] 到 [s - 1, s]，所以只用s - 1;</span><br>    <span class="hljs-type">int</span> ans = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; n; ++i)&#123;<br>        <span class="hljs-type">int</span> l = <span class="hljs-built_in">lower_bound</span>(X + <span class="hljs-number">1</span>, X + s + <span class="hljs-number">1</span>, L[i].x1) - X;<br>        <span class="hljs-type">int</span> r = <span class="hljs-built_in">lower_bound</span>(X + <span class="hljs-number">1</span>, X + s + <span class="hljs-number">1</span>, L[i].x2) - X;<br>        <span class="hljs-built_in">rangeApply</span>(<span class="hljs-number">1</span>, l, r - <span class="hljs-number">1</span>, L[i].tag);<br>        ans += tr[<span class="hljs-number">1</span>].len * (L[i + <span class="hljs-number">1</span>].h - L[i].h);<br>    &#125;<br>    cout&lt;&lt;ans&lt;&lt;<span class="hljs-string">&quot;\n&quot;</span>;<br><br>    <span class="hljs-keyword">return</span> ;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    ios::<span class="hljs-built_in">sync_with_stdio</span>(<span class="hljs-literal">false</span>); <br>    cin.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br>    cout.<span class="hljs-built_in">tie</span>(<span class="hljs-number">0</span>);<br><br>    <span class="hljs-type">int</span> t = <span class="hljs-number">1</span>;<br>    <span class="hljs-comment">//cin&gt;&gt;t;</span><br><br>    <span class="hljs-keyword">while</span> (t--) &#123;<br>        <span class="hljs-built_in">solve</span>();<br>    &#125;<br><br>    <span class="hljs-comment">//cout&lt;&lt;fixed &lt;&lt;setprecision(12) &lt;&lt; (double)clock() / (double)CLOCKS_PER_SEC &lt;&lt; &quot;\n&quot;;</span><br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
                 
               </div>
@@ -306,8 +297,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>http://yellow-chick.github.io/2024/08/04/hello-world/</div>
+      <div>SegmentTree</div>
+      <div>http://yellow-chick.github.io/2024/10/14/SegmentTree/SegmentTree/</div>
     </div>
     <div class="license-meta">
       
@@ -319,7 +310,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月4日</div>
+          <div>2024年10月14日</div>
         </div>
       
       
@@ -351,18 +342,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/04/%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E6%80%A7/%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E6%80%A7/" title="图的连通性">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">图的连通性</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/31/first-test/" title="first-test">
-                        <span class="hidden-mobile">first-test</span>
+                      <a href="/2024/10/13/Yellow-Chick-Weekly-contest1%E9%A2%98%E8%A7%A3/Yellow-Chick-Weekly-contest1%E9%A2%98%E8%A7%A3/" title="Yellow_Chick-Weekly_contest1题解">
+                        <span class="hidden-mobile">Yellow_Chick-Weekly_contest1题解</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
